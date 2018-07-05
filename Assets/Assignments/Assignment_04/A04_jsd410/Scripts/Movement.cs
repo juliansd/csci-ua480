@@ -32,11 +32,11 @@ namespace jsd410 {
 
         void Teleport() {
             RaycastHit hit;
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray.origin, ray.direction, out hit, float.PositiveInfinity)) {
+            // Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, float.PositiveInfinity)) {
                 GameObject mazeCell = hit.collider.gameObject;
                 if(mazeCell.tag == "MazeCell" || mazeCell.tag == "MazeWall") {
-                    if (hit.distance >= 5) {
+                    if (hit.distance >= 2.5f) {
                         transform.position = hit.point;
                     }
                     else {

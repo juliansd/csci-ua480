@@ -61,12 +61,10 @@ namespace jsd410 {
                 }
                 else {
                     CreateWall(currentCell, neighbor, direction);
-                    // No longer remove the cell here.
                 }
             }
             else {
                 CreateWall(currentCell, null, direction);
-                // No longer remove the cell here.
             }
         }
 
