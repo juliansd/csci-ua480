@@ -47,9 +47,9 @@ namespace jsd410 {
                         }
                     }
                 }
-                if (mazeCell.tag == "MazeWall") {
-                    transform.position = hit.point;
-                }
+                // if (mazeCell.tag == "MazeWall") {
+                //     transform.position = hit.point;
+                // }
                 if (transform.position.y < 2.25f) {
                     transform.position = new Vector3(transform.position.x, 2.25f, transform.position.z);
                 }
