@@ -38,21 +38,23 @@ public class Maze : MonoBehaviour {
             activeCells.RemoveAt(currentIndex);
             return;
         }
-        MazeDirection direction = MazeDirections.RandomUninitializedDirection;
+        MazeDirection direction = currentCell.RandomUninitializedDirection;
         IntVector2 coordinates = currentCell.coordinates + direction.ToIntVector2();
-        if (ContainsCoordinates(coordinates) && GetCell(coordinates) == null) {
+        if (ContainsCoordinates(coordinates)) {
             MazeCell neighbor = GetCell(coordinates);
             if (neighbor == null) {
                 neighbor = CreateCell(coordinates);
                 CreatePassage(currentCell, neighbor, direction);
                 activeCells.Add(neighbor);
-            } else {
-                CreateWall(currentCell, neighbor, direction);
             }
-            activeCells.Add(CreateCell(coordinates));
+            else {
+                CreateWall(currentCell, neighbor, direction);
+                // No longer remove the cell here.
+            }
         }
         else {
             CreateWall(currentCell, null, direction);
+            // No longer remove the cell here.
         }
     }
 

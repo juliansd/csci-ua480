@@ -8,7 +8,6 @@ namespace jsd410 {
 
         public float topSpeed;
         private float speed = 0;
-        // private bool isMoving;
 
         void Update() {
             if (Input.GetMouseButton(0)) {
@@ -23,10 +22,10 @@ namespace jsd410 {
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray.origin, ray.direction, out hit, float.PositiveInfinity)) {
-                GameObject plane = hit.collider.gameObject;
-                if(plane.tag == "Plane") {
+                GameObject mazeCell = hit.collider.gameObject;
+                print(mazeCell.name);
+                if(mazeCell.tag == "MazeCell") {
                     if (hit.distance >= 5) {
-                        print("ok");
                         transform.position = hit.point;
                     }
                     else {
@@ -36,15 +35,18 @@ namespace jsd410 {
                         }
                     }
                 }
-                if (transform.position.y < 0.5) {
-                    transform.position = new Vector3(transform.position.x, 1f, transform.position.z);
+                if (mazeCell.tag == "MazeWall") {
+                    transform.position = hit.point;
+                }
+                if (transform.position.y < 2.25f) {
+                    transform.position = new Vector3(transform.position.x, 2.25f, transform.position.z);
                 }
             }
         }
 
         void EasingMovement() {
-            if (Camera.main.transform.position.y < 0.5f) {
-                transform.position = new Vector3(transform.position.x, 1f, transform.position.z);
+            if (Camera.main.transform.position.y < 2.25f) {
+                transform.position = new Vector3(transform.position.x, 2.25f, transform.position.z);
             }
             if (speed < topSpeed) {
                 transform.Translate(Camera.main.transform.forward * speed * Time.deltaTime);
@@ -57,8 +59,8 @@ namespace jsd410 {
         void Decelerate() {
             transform.Translate(Camera.main.transform.forward * speed * Time.deltaTime);
             speed -= 0.1f;
-            if (transform.position.y < 1f)
-                transform.position = new Vector3(transform.position.x, 1f, transform.position.z);
+            if (transform.position.y < 2.25f)
+                transform.position = new Vector3(transform.position.x, 2.25f, transform.position.z);
         }
     }
 }

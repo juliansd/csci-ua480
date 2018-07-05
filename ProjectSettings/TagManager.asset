@@ -4,7 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Plane
+  - MazeCell
+  - MazeWall
   layers:
   - Default
   - TransparentFX
