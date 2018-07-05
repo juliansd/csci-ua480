@@ -6,41 +6,59 @@ namespace jsd410 {
 
     public class Movement : MonoBehaviour {
 
-        private float timeButtonIsPressed = 0;
         public float topSpeed;
+        private float speed = 0;
+        // private bool isMoving;
 
         void Update() {
-            if (Input.GetMouseButtonDown(0)) {
+            if (Input.GetMouseButton(0)) {
+                Teleport();
+            }
+            if (speed > 0) {
+                Decelerate();
+            }
+        }
 
-                // Does Teleport
-                if (timeButtonIsPressed < 0.1) {
-                    RaycastHit hit;
-                    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                    if (Physics.Raycast(ray.origin, ray.direction, out hit, float.PositiveInfinity)) {
-                        GameObject plane = hit.collider.gameObject;
-                        if(plane.tag == "Plane") {
-                            transform.position = hit.point;
-                        }
-                        if (transform.position.y < 0.5) {
-                            transform.position = new Vector3(transform.position.x, 0.5f, transform.position.z);
-                        }
+        void Teleport() {
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray.origin, ray.direction, out hit, float.PositiveInfinity)) {
+                GameObject plane = hit.collider.gameObject;
+                if(plane.tag == "Plane") {
+                    if (hit.distance >= 5) {
+                        print("ok");
+                        transform.position = hit.point;
                     }
-                } else {
-                    RaycastHit hit;
-                    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                    if (Physics.Raycast(ray.origin, ray.direction, out hit, float.PositiveInfinity)) {
-                        GameObject plane = hit.collider.gameObject;
-                        if(plane.tag == "Plane") {
-                            transform.position = hit.point;
-                        }
-                        if (transform.position.y < 0.5) {
-                            transform.position = new Vector3(transform.position.x, 0.5f, transform.position.z);
+                    else {
+                        EasingMovement();
+                        if (speed < topSpeed) {
+                            speed += 0.1f;
                         }
                     }
                 }
+                if (transform.position.y < 0.5) {
+                    transform.position = new Vector3(transform.position.x, 1f, transform.position.z);
+                }
             }
-            timeButtonIsPressed = 0;
         }
-        
+
+        void EasingMovement() {
+            if (Camera.main.transform.position.y < 0.5f) {
+                transform.position = new Vector3(transform.position.x, 1f, transform.position.z);
+            }
+            if (speed < topSpeed) {
+                transform.Translate(Camera.main.transform.forward * speed * Time.deltaTime);
+                speed += 0.1f;
+            } else {
+                transform.Translate(Camera.main.transform.forward * topSpeed * Time.deltaTime);
+            }
+        }
+
+        void Decelerate() {
+            transform.Translate(Camera.main.transform.forward * speed * Time.deltaTime);
+            speed -= 0.1f;
+            if (transform.position.y < 1f)
+                transform.position = new Vector3(transform.position.x, 1f, transform.position.z);
+        }
     }
 }
