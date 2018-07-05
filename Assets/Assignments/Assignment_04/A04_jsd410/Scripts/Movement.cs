@@ -35,8 +35,7 @@ namespace jsd410 {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray.origin, ray.direction, out hit, float.PositiveInfinity)) {
                 GameObject mazeCell = hit.collider.gameObject;
-                print(mazeCell.name);
-                if(mazeCell.tag == "MazeCell") {
+                if(mazeCell.tag == "MazeCell" || mazeCell.tag == "MazeWall") {
                     if (hit.distance >= 5) {
                         transform.position = hit.point;
                     }
