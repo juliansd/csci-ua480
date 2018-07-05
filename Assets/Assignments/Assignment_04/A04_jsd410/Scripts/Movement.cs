@@ -2,7 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/**
+* This code was developed from the help of a tutorial on creating randomly generated mazes
+* from scratch in unity.
+* https://catlikecoding.com/unity/tutorials/maze/
+**/
+
+
 namespace jsd410 {
+
+    // This class is used for the main movement of the player.
+    // If the player is looking at the floor, they will accelerate while
+    // holding down button and decelerate if they let go.
+    // If the player looks at a wall in the maze they will teleport.
 
     public class Movement : MonoBehaviour {
 

@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MazePassage : MazeCellEdge {
+/**
+* This code was developed from the help of a tutorial on creating randomly generated mazes
+* from scratch in unity.
+* https://catlikecoding.com/unity/tutorials/maze/
+**/
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+namespace jsd410 {
+
+    public class MazePassage : MazeCellEdge {
+        
+    }
 }
