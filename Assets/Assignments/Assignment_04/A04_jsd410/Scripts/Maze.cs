@@ -8,6 +8,8 @@ public class Maze : MonoBehaviour {
     private MazeCell[,] cells;
     public IntVector2 size;
     public float generationStepDelay;
+    public MazePassage passagePrefab;
+    public MazeWall wallPrefab;
 
     private void DoFirstGenerationStep (List<MazeCell> activeCells) {
         activeCells.Add(CreateCell(RandomCoordinates));
