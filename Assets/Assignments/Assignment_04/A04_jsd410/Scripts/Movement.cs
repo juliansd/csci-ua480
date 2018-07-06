@@ -36,7 +36,7 @@ namespace jsd410 {
             if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, float.PositiveInfinity)) {
                 GameObject mazeCell = hit.collider.gameObject;
                 if(mazeCell.tag == "MazeCell" || mazeCell.tag == "MazeWall") {
-                    if (hit.distance >= 2.5f) {
+                    if (hit.distance >= 2f) {
                         transform.position = hit.point;
                     }
                     else {
