@@ -4,8 +4,13 @@
 TagManager:
   serializedVersion: 2
   tags:
+<<<<<<< HEAD
   - MazeCell
   - MazeWall
+=======
+  - Ball
+  - bullet
+>>>>>>> my_assignment03
   layers:
   - Default
   - TransparentFX
